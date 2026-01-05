@@ -26,9 +26,8 @@ userSchema.statics.hashPassword = async function (plainPassword) {
 };
 
 // Optional (redundant but fine)
-userSchema.pre("save", function (next) {
+userSchema.pre("save", function () {
   if (this.email) this.email = this.email.toLowerCase().trim();
-  next();
 });
 
 export default mongoose.model("User", userSchema);

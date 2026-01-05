@@ -2,8 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet'
 import morgan from 'morgan';
-
-
+import authRoutes from "./routes/auth.routes.js"
 const app=express();
 
 app.use((req, res, next) => {
@@ -22,7 +21,7 @@ app.use(helmet({
   }));
   
 app.use(cors({
-    origin: "http://localhost:5173/",
+    origin: "http://localhost:5173",
     credentials:true
 }));
 app.use(express.json());
@@ -34,5 +33,7 @@ app.get("/health",(req,res)=>{
     res.json({status:"OK"})
 
 });
+
+app.use("/api/auth",authRoutes)
 
 export default app;
