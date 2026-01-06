@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema(
       index: true,
     },
     passwordHash: { type: String, select: false, required: true },
-    role: { type: String, enum: ["ADMIN", "MEMBER", "VIEWER"], default: "MEMBER" },
   },
   { timestamps: true }
 );

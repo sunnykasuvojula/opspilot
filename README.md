@@ -59,3 +59,6 @@ Build POST /auth/register + POST /auth/login
 Build GET /auth/me to test auth quickly
 
 Then start React screens
+
+
+https://www.figma.com/make/0ngqmeRZhCG1w8l6UA5wUX/OpsPilot-Team-Collaboration-App?t=xZk2RpAw30NGPvjM-1
