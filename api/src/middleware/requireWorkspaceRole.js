@@ -1,4 +1,4 @@
-import WorkspaceMember from "../models/WorkspaceMember";
+import WorkspaceMember from "../models/WorkspaceMember.js";
 
 /**
  * Workspace RBAC middleware.

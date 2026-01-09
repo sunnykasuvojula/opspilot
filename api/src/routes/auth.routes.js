@@ -2,6 +2,7 @@ import {Router} from 'express';
 import { register,login } from '../controllers/auth.controller.js';
 import { getMyWorkspaces } from '../controllers/workspace.controller.js';
 import requireWorkspaceRole from '../middleware/requireWorkspaceRole.js';
+import {listProjects,createProject} from '../controllers/project.controller.js';
 import auth from '../middleware/auth.js';
 
 const router=Router();
@@ -15,7 +16,7 @@ router.get("/workspaces/me",auth,getMyWorkspaces)
 router.get("/workspaces/:workspaceId/projects",auth, requireWorkspaceRole("VIEWER"), listProjects)
 
 // Only ADMIN/OWNER can create projects
-router.get("/workspaces/:workspaceId/projects",auth, requireWorkspaceRole("ADMIN"), createProject)
+router.post("/workspaces/:workspaceId/projects",auth, requireWorkspaceRole("ADMIN"), createProject)
 
 //protected route example
 router.get("/me",auth,(req,res)=>{
