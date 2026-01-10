@@ -24,8 +24,6 @@ export async function listProjects(req, res, next) {
 
 export async function createProject(req, res, next) {
   try {
-    console.log("req params is ::", req.params);
-
     const { workspaceId } = req.params;
     const userId = req.user?.userId || req.user?.id;
 
@@ -77,5 +75,66 @@ export async function createProject(req, res, next) {
       });
     }
     next(err);
+  }
+}
+
+export async function deleteProject(req, res, next) {
+  console.log("req params is::"+JSON.stringify(req.params));
+  const {workspaceId,projectId}=req.params;
+
+  //Make sure project belong to the workspace
+
+  const project=await Project.findOne({
+    _id: projectId,
+    workspaceId: workspaceId
+  })
+
+  if(!project)
+  {
+    return res.status(400).json({message:"Project not found in workspace"});
+  }
+
+  await Project.findOneAndDelete({_id:projectId});
+  res.json({success: true })
+}
+
+export async function updateProject(req,res,next){
+  console.log("req params is"+JSON.stringify(req.params));
+  console.log("req body is ::"+JSON.stringify(req.body));
+  const {workspaceId,projectId}=req.params;
+  const {name,key,description}=req.body;
+
+  const project=await Project.findOne({
+    _id:projectId,
+    workspaceId:workspaceId
+  })
+  try{
+
+  if(!project)
+  {
+    return res.status(400).json({message:"Project not found in the workspace"});
+  }
+
+  const updatedProject=await Project.findOneAndUpdate(
+    {_id:projectId,workspaceId},
+    {
+      $set:{
+        name:name,
+        key:key,
+        description:description,
+      },
+    },
+    {new:true}
+  );
+   res.json({project:updatedProject});
+
+  }
+  catch(err)
+  {
+    if(err.code==11000)
+    {
+      return res.status(409).json({message:"Project key already exists in this workspace"})
+    }
+    throw err;
   }
 }
