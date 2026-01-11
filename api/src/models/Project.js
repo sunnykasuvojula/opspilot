@@ -7,6 +7,7 @@ const projectScehma=new mongoose.Schema(
         key:{type:String, required:true, trim:true}, //like HR, OPS ETC..
         description:{type:String, trim:true},
         createdBy:{type:mongoose.Schema.Types.ObjectId, ref:"User", required:true },
+        nextIssueNumber:{type:Number,default:1}
     },
     {timestamps:true}
 );
