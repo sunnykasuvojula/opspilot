@@ -1,16 +1,40 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Navbar from './components/Navbar'
+import { Navigate, Route, Routes } from 'react-router-dom'
+
+import PublicLayout from './layouts/PublicLayout';
+import AppLayout from './layouts/AppLayout';
+
+import Landing from '@/pages/Landing';
+import Register from '@/pages/Register'
+import Login from './pages/Login'
+import Dashboard from './app/dashboard';
+import Projects from '@/app/Projects';
+import Issues from '@/app/Issues';
+import Settings from '@/app/Settings';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    <div className="min-h-screen grid place-items-center">
-      <h1 className="text-3xl font-bold border border-amber-400 font-bold underline p-12">Tailwind is working ✅</h1>
-    </div>
+    <Routes>
+      {/*PUBLIC PAGES WITH NO NAVBAR */}
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<Landing />}/>
+        <Route path="/register" element={<Register />}/>
+        <Route path="/login" element={<Login />} />
+      </Route>
+
+
+      {/**APP PAGES WITH NAVBAR */}
+      <Route path="/app" element={<AppLayout />}>
+        <Route index element={<Navigate to="dashboard" replace />} /> 
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="projects" element={<Projects />} />
+        <Route path="issues" element={<Issues />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
+    </Routes>
     </>
   )
 }

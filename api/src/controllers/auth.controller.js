@@ -63,27 +63,55 @@ catch(err)
 
 }
 
-
-export async function login(req,res) 
-{
-    const {email,password}=req.body;
-    //1.find user (include passwordHash)
-
-    const user=await User.findOne({email:email.toLowerCase().trim()}).select("+passwordHash")
-    
-    if(!user) return res.status(401).json({message:"Invalid credentials"});
-
-    //2.compare password
-    const ok=await user.comparePassword(password);
-    if(!ok) return res.status(401).json({message:"Invalid credentials"});
-
-    //create JWT
-    const token=signAccessToken(user);
-
-    //return token + safe user
-
-    res.json({
+export async function login(req, res) {
+    try {
+      const { email, password } = req.body;
+  
+      // 1. Find user (include passwordHash) ✅ Perfect
+      const user = await User.findOne({ 
+        email: email.toLowerCase().trim() 
+      }).select("+passwordHash");
+      
+      if (!user) {
+        return res.status(401).json({ message: "Invalid credentials" });
+      }
+  
+      // 2. Compare password ✅ Perfect
+      const ok = await user.comparePassword(password);
+      if (!ok) {
+        return res.status(401).json({ message: "Invalid credentials" });
+      }
+  
+      // 3. Create JWT ✅ Perfect
+      const token = signAccessToken(user);
+  
+      // 4. FIX: Get workspace & membership (same as register)
+      const workspace = await Workspace.findOne({ createdBy: user._id });
+      const membership = await WorkspaceMember.findOne({ 
+        workspaceId: workspace._id, 
+        userId: user._id 
+      });
+  
+      // 5. SAME response as register ✅
+      res.json({
         token,
-        user:{id:user._id, name:user.name, email:user.email},
-    });
-}
+        user: { 
+          id: user._id, 
+          name: user.name, 
+          email: user.email 
+        },
+        workspace: { 
+          id: workspace._id, 
+          name: workspace.name 
+        },
+        membership: { 
+          role: membership.role, 
+          status: membership.status 
+        }
+      });
+    } catch (error) {
+      console.error("Login error:", error);
+      res.status(500).json({ message: "Server error" });
+    }
+  }
+  
