@@ -1,0 +1,17 @@
+[
+    {
+      "title": "Todo List App",
+      "description":"A simple React todo app to add, edit, and delete daily tasks using useState.",
+      "tech": ["React", "CSS"]
+    },
+    {
+      "title": "Weather Finder",
+      "description": "Search any city and show current weather using the OpenWeather API.",
+      "tech": ["React", "Fetch API"]
+    },
+    {
+      "title": "Expense Tracker",
+      "description": "Track monthly income and expenses with charts and localStorage.",
+      "tech": ["React", "localStorage"]
+    }
+  ]

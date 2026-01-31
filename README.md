@@ -62,3 +62,9 @@ Then start React screens
 
 
 https://www.figma.com/make/0ngqmeRZhCG1w8l6UA5wUX/OpsPilot-Team-Collaboration-App?t=xZk2RpAw30NGPvjM-1
+
+
+OWNER     → Create/Delete projects + Full issue control
+ADMIN     → Update/Delete projects + Full issue control  
+MEMBER    → Create/Update issues
+VIEWER    → Read-only
