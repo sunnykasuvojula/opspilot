@@ -30,8 +30,6 @@ function App() {
       <Route path="/app" element={<AppLayout />}>
         <Route index element={<Navigate to="dashboard" replace />} /> 
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="projects" element={<Projects />} />
-        <Route path="issues" element={<Issues />} />
         <Route path="settings" element={<Settings />} />
       </Route>
     </Routes>

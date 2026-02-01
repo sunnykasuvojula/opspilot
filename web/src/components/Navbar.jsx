@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="flex justify-between p-3 border">
       <h1 className="text-xl font-bold">OPSPILOT</h1>
       <div className="flex gap-6">
-        {["dashboard", "issues", "projects", "settings"].map((item) => (
+        {["dashboard", "settings"].map((item) => (
           <NavLink
             key={item}
             to={`/app/${item}`}

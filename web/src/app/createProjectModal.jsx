@@ -2,7 +2,7 @@ import { useState } from "react";
 import api from "@/lib/api";
 
 const CreateProjectModal=({ workspaceId, onClose, onProjectCreated })=>{
-  console.log("input data is", workspaceId)
+  console.log("workspaceId in createProjectModal is :", workspaceId);
     const[name,setName]=useState("");
     const[key,setKey]=useState("");
     const[description,setDescription]=useState("");
@@ -21,6 +21,7 @@ const CreateProjectModal=({ workspaceId, onClose, onProjectCreated })=>{
                 key,
                 description
             });
+            console.log("created input data response is :", data);
             onProjectCreated(data.project);
             onClose();
         } catch (error) {

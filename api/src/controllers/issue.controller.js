@@ -14,7 +14,8 @@ export async function listIssues(req, res, next) {
                 workspaceId:new mongoose.Types.ObjectId(workspaceId),
                 projectId:new mongoose.Types.ObjectId(projectId),
             }).sort({createdAt:-1})
-            .select("issueKey issueNumber title type status priority assigneeId createdBy createdAt updatedAt");
+            .populate("assigneeId", "name")
+            .select("issueKey description issueNumber title type status priority assigneeId createdBy createdAt updatedAt");
     
             return res.json({issues});
     }
@@ -33,7 +34,7 @@ export async function createIssue(req, res, next) {
 
     const title = typeof req.body?.title === "string" ? req.body.title.trim() : "";
     const description =
-      typeof req.body?.description === "string" ? req.body.description.trim() : undefined;
+      typeof req.body?.description === "string" ? req.body.description.trim() : "";
 
     const type = typeof req.body?.type === "string" ? req.body.type.toUpperCase().trim() : "TASK";
     const status =
