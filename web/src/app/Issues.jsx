@@ -1,6 +1,6 @@
 import api from "@/lib/api";
 import { useEffect, useState } from "react";
-import IssueTable from "./issueTable";
+import IssueTable from "./IssueTable";
 import CreateIssueModal from "./CreateIssueModal";
 
 const Issues = ({ projectId, projectName, workspaceId }) => {

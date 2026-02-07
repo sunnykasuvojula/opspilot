@@ -1,7 +1,7 @@
 import Projects from "./Projects";
 import { useState,useEffect } from "react";
 import api from "@/lib/api";
-import CreateProjectModal from "./createProjectModal";
+import CreateProjectModal from "./CreateProjectModal";
 import Issues from "./Issues";
 const Dashboard=()=>{
 const workspaceId=localStorage.getItem("opspilot_activeWorkspaceId");
