@@ -10,6 +10,8 @@ app.use((req, res, next) => {
     next();
   });
   
+  const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+
 //security and parsinf
 /**
  * 1️⃣ Prevents MIME sniffing
@@ -20,10 +22,12 @@ app.use(helmet({
     crossOriginResourcePolicy: false
   }));
   
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials:true
-}));
+  app.use(
+    cors({
+      origin: [FRONTEND_URL],
+      credentials: true,
+    })
+  );
 app.use(express.json());
 app.use(morgan("dev"));
 
