@@ -1,0 +1,26 @@
+# node dependencies (all apps)
+**/node_modules/
+
+# env files (all apps)
+**/.env
+**/.env.*
+
+# build outputs
+**/dist/
+**/build/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Vercel
+.vercel/

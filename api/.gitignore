@@ -1,0 +1,13 @@
+# backend env
+.env
+.env.*
+
+# logs
+logs/
+*.log
+
+# coverage
+coverage/
+
+# temp files
+tmp/
