@@ -8,8 +8,8 @@ import AppLayout from './layouts/AppLayout';
 
 import Landing from '@/pages/Landing';
 import Register from '@/pages/Register'
-import Login from './pages/Login'
-import Dashboard from './app/dashboard';
+import Login from '@/pages/Login'
+import Dashboard from '@/app/Dashboard';
 import Projects from '@/app/Projects';
 import Issues from '@/app/Issues';
 import Settings from '@/app/Settings';
