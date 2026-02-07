@@ -1,6 +1,6 @@
 import api from "@/lib/api";
 import { useNavigate } from "react-router-dom";
-const Projects = ({ projects = [], workspaceId,onProjectDeleted,onSelectProject }) => {
+const Projects = ({ projects = [], workspaceId,onProjectDeleted,onSelectProject,onEditProject }) => {
   const nav=useNavigate();
   console.log("workspace id is:", workspaceId);
     if (!projects.length) return <p>No projects found</p>;
@@ -9,6 +9,7 @@ const Projects = ({ projects = [], workspaceId,onProjectDeleted,onSelectProject 
       await api.delete(`/api/auth/workspaces/${workspaceId}/projects/${projectId}`)
       onProjectDeleted(projectId);
     }
+    
     return (
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -29,7 +30,7 @@ const Projects = ({ projects = [], workspaceId,onProjectDeleted,onSelectProject 
             <button onClick={() => onSelectProject(p)} className="flex-1 hover:cursor-pointer hover:bg-gray-600 hover:text-white border rounded-xl bg-green-500 p-2 text-sm">
                 Open
               </button>
-              <button className="flex-1 hover:cursor-pointer hover:bg-gray-600 hover:text-white border rounded-xl bg-yellow-400 p-2 text-sm">
+              <button onClick={() => onEditProject(p)} className="flex-1 hover:cursor-pointer hover:bg-gray-600 hover:text-white border rounded-xl bg-yellow-400 p-2 text-sm">
                 Edit
               </button>
               <button onClick={()=>handleDelete(p._id)} className="flex-1 hover:cursor-pointer hover:bg-gray-600 hover:text-white border rounded-xl bg-red-500  p-2 text-sm">

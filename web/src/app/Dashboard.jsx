@@ -9,6 +9,7 @@ const [projects,setProjects]=useState([]);
 const[loading, setLoading]=useState(true);
 const [selectedProject, setSelectedProject]=useState();
 const [showModal,setShowModal]=useState(false);
+const [editingProject, setEditingProject] = useState(null);
 
 useEffect(()=>{
     const getProjects=async()=>{
@@ -46,7 +47,11 @@ const handleProjectCreated=(newProject)=>{
             <div className="p-3 m-3 rounded-xl">
                 {loading?
                 (<p>Projects Loading</p>):projects.length?
-                (<Projects projects={projects} workspaceId={workspaceId} onSelectProject={setSelectedProject} onProjectDeleted={(deletedId) => {setProjects(prev => prev.filter(p => p._id !== deletedId));
+                (<Projects projects={projects} workspaceId={workspaceId} onSelectProject={setSelectedProject}   onEditProject={(project) => {
+                    setEditingProject(project);
+                    setShowModal(true);
+                  }}
+                   onProjectDeleted={(deletedId) => {setProjects(prev => prev.filter(p => p._id !== deletedId));
                     if(selectedProject?._id===deletedId)
                     {
                         selectedProject(null);
@@ -54,7 +59,15 @@ const handleProjectCreated=(newProject)=>{
                 }} />):
                 (<p>No projects found</p>)}
             </div>
-            {showModal && (<CreateProjectModal workspaceId={workspaceId} onClose={()=>setShowModal(false)} onProjectCreated={handleProjectCreated} />)}
+            {showModal && (<CreateProjectModal workspaceId={workspaceId} project={editingProject}  onClose={()=>{setShowModal(false); setEditingProject(null);}} onProjectCreated={handleProjectCreated}
+            onProjectUpdated={(updatedProject)=>{
+                setProjects(prev=>prev.map(p=>p._id===updatedProject._id?updatedProject:p));
+                if(selectedProject?._id===updatedProject._id)
+                {
+                    setSelectedProject(updatedProject);
+                }
+            }}  
+             />)}
         </div>
         <div>
         {selectedProject && (
