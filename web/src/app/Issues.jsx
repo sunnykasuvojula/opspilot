@@ -1,10 +1,12 @@
 import api from "@/lib/api";
 import { useEffect, useState } from "react";
 import IssueTable from "./issueTable";
+import CreateIssueModal from "./CreateIssueModal";
 
 const Issues = ({ projectId, projectName, workspaceId }) => {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal]=useState(false);
 
   useEffect(() => {
     const fetchIssues = async () => {
@@ -23,6 +25,9 @@ const Issues = ({ projectId, projectName, workspaceId }) => {
     fetchIssues();
   }, [projectId, workspaceId]);
 
+  const handleIssueCreation=(newIssue)=>{
+    setIssues((prev)=>[newIssue, ...prev])
+  }
   if (loading) return <p>Issues Loading..</p>;
 
   return (
@@ -42,6 +47,7 @@ const Issues = ({ projectId, projectName, workspaceId }) => {
         <p className="text-center text-gray-500">No issues found.</p>
         ) : (<IssueTable issues={issues} workspaceId={workspaceId} projectId={projectId} onDelete={(id) =>setIssues((prev) => prev.filter((i) => i._id !== id))} />)}
       </div>
+      {showModal && (<CreateIssueModal workspaceId={workspaceId} projectId={projectId} onClose={()=>setShowModal(false)} onIssueCreated={handleIssueCreation} />)}
     </div>
   );
 };
