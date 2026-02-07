@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api=axios.create({
-    baseURL:"/",
+    baseURL:import.meta.env.VITE_API_BASE_URL,
 });
 
 // 🔐 Request interceptor (attach JWT) to every request sent from my frontend
