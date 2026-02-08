@@ -13,6 +13,7 @@ import Dashboard from '@/app/Dashboard';
 import Projects from '@/app/Projects';
 import Issues from '@/app/Issues';
 import Settings from '@/app/Settings';
+import Profile from './app/Profile';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route index element={<Navigate to="dashboard" replace />} /> 
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
     </>
