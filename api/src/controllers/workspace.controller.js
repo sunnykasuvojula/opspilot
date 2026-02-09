@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import WorkspaceMember from "../models/WorkspaceMember.js";
 export async function getMyWorkspaces(req,res) {
+    console.log("Fetching workspaces for user:", req);
     const userId=req.user.userId;
     const memeberships=await WorkspaceMember.find({
 
