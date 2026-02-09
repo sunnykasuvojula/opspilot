@@ -46,7 +46,7 @@ const CreateProjectModal = ({
     setLoading(true);
 
     try {
-      if (project) {
+      if (project?._id) {
         // EDIT
         const { data } = await api.patch(
           `/api/auth/workspaces/${workspaceId}/projects/${project._id}`,
